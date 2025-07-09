@@ -11,7 +11,6 @@ import net.minecraft.client.network.CookieStorage;
 import net.minecraft.client.network.ServerAddress;
 import net.minecraft.client.network.ServerInfo;
 import net.minecraft.text.Text;
-import net.pd98.STOPPPClient;
 import net.pd98.STOPPPConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -32,15 +31,12 @@ public class ConnectionScreenMixin {
 
 	@Inject(method = "Lnet/minecraft/client/gui/screen/multiplayer/ConnectScreen;connect(Lnet/minecraft/client/gui/screen/Screen;Lnet/minecraft/client/MinecraftClient;Lnet/minecraft/client/network/ServerAddress;Lnet/minecraft/client/network/ServerInfo;ZLnet/minecraft/client/network/CookieStorage;)V", at = @At("HEAD"), cancellable = true)
 	private static void onConnect(Screen screen, MinecraftClient client, ServerAddress address, ServerInfo info, boolean quickPlay, CookieStorage cookieStorage, CallbackInfo ci) {
-//		STOPPPClient.LOGGER.info("CONNECTING TO " + address.getAddress());
 
 		if (isBlocked(address.getAddress())) {
-			ci.cancel(); // First cancel the connection
-
 			client.setScreen(new DisconnectedScreen(
 					new MultiplayerScreen(new TitleScreen()),
-					Text.literal("WHOA WHOA WHOA THERE"),
-					Text.literal("That was a close one buddy.")
+					Text.literal(config.errorTextLine1),
+					Text.literal(config.errorTextLine2)
 			));
 
 		}
