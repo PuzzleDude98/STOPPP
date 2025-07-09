@@ -43,10 +43,10 @@ dependencies {
 
 	modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
 
-	modApi("me.shedaniel.cloth:cloth-config-fabric:19.0.147") {
+	modApi("me.shedaniel.cloth:cloth-config-fabric:15.0.140") {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
-	include("me.shedaniel.cloth:cloth-config-fabric:19.0.147") // <--- this includes it in your jar
+	include("me.shedaniel.cloth:cloth-config-fabric:15.0.140") // <--- this includes it in your jar
 }
 
 processResources {
